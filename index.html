@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goal Setting Workshop 2027 — Mfonobong Umondia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #104547;
+    --mint: #c3e8bd;
+    --pink: #ff99c8;
+    --cream: #fcf6bd;
+    --lavender: #e4c1f9;
+    --mint2: #d0f4de;
+    --sky: #a9def9;
+    --paper: #fdfaf2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--r, 0deg)); }
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px) rotate(var(--r, 0deg)) scale(0.92); }
+    to { opacity: 1; transform: translateY(0) rotate(var(--r, 0deg)) scale(1); }
+  }
+  @keyframes popPin {
+    0% { opacity: 0; transform: scale(0.5) rotate(-4deg); }
+    70% { transform: scale(1.08) rotate(-4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-4deg); }
+  }
+  @keyframes heroTextIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(195,232,189,0.5); }
+    100% { box-shadow: 0 0 0 14px rgba(195,232,189,0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(.22,.61,.36,1), transform 0.7s cubic-bezier(.22,.61,.36,1);
+  }
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-stagger .stagger-child {
+    opacity: 0;
+  }
+  .reveal-stagger.in-view .stagger-child {
+    animation: cardIn 0.6s cubic-bezier(.22,.61,.36,1) both;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: 'Fraunces', serif; letter-spacing: -0.01em; }
+
+  .tag-font { font-family: 'Caveat', cursive; }
+
+  a { color: inherit; }
+
+  img, svg { display: block; }
+
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 32px;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+  .nav-cta {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    display: inline-block;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .nav-cta:hover {
+    background: var(--pink);
+    color: var(--ink);
+    transform: translateY(-2px);
+  }
+  nav {
+    animation: heroTextIn 0.7s ease both;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,153,200,0.16);
+    color: var(--pink);
+    border: 1px solid rgba(255,153,200,0.4);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    animation: heroTextIn 0.7s ease 0.05s both;
+  }
+  .eyebrow span.dot {
+    display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--pink);
+    animation: pulseRing 1.8s ease-out infinite;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.08;
+    color: var(--paper);
+    animation: heroTextIn 0.7s ease 0.15s both;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mint);
+    font-weight: 500;
+  }
+  .hero p.sub {
+    margin-top: 22px;
+    font-size: 1.1rem;
+    color: rgba(253,250,242,0.78);
+    max-width: 48ch;
+    animation: heroTextIn 0.7s ease 0.25s both;
+  }
+  .hero-ctas {
+    margin-top: 34px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    animation: heroTextIn 0.7s ease 0.35s both;
+  }
+  .btn-primary {
+    background: var(--pink);
+    color: var(--ink);
+    padding: 15px 30px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    box-shadow: 0 10px 30px -8px rgba(255,153,200,0.6);
+    display: inline-block;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 16px 34px -8px rgba(255,153,200,0.75);
+    background: var(--mint);
+  }
+  .btn-primary:active { transform: translateY(-1px) scale(0.99); }
+  .btn-secondary {
+    border: 1.5px solid rgba(253,250,242,0.35);
+    color: var(--cream);
+    padding: 14px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-block;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .btn-secondary:hover { border-color: var(--mint2); transform: translateY(-2px); }
+  .hero-meta {
+    margin-top: 30px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: rgba(253,250,242,0.65);
+    animation: heroTextIn 0.7s ease 0.45s both;
+  }
+  .hero-meta strong { color: var(--mint2); display:block; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:2px;}
+
+  /* Vision board collage */
+  .board {
+    position: relative;
+    height: 460px;
+  }
+  .card {
+    position: absolute;
+    border-radius: 14px;
+    padding: 18px;
+    width: 168px;
+    box-shadow: 0 18px 30px -12px rgba(0,0,0,0.35);
+    font-family: 'Fraunces', serif;
+    opacity: 0;
+    animation: cardIn 0.6s cubic-bezier(.22,.61,.36,1) forwards, floatCard 5s ease-in-out infinite;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-14px) rotate(0deg) scale(1.05) !important;
+    box-shadow: 0 24px 40px -12px rgba(0,0,0,0.45);
+    animation-play-state: paused, paused;
+    z-index: 4;
+  }
+  .card .word { font-size: 1.3rem; font-weight: 600; line-height:1.15; }
+  .card .note { font-family: 'Caveat', cursive; font-size: 1.05rem; margin-top: 8px; opacity:0.75; }
+  .c1 { --r: -7deg; background: var(--mint); color: var(--ink); top: 0; left: 10px; animation-delay: 0.1s, 0.7s; }
+  .c2 { --r: 6deg; background: var(--pink); color: var(--ink); top: 18px; right: 0; width:150px; animation-delay: 0.25s, 0.85s; }
+  .c3 { --r: 4deg; background: var(--sky); color: var(--ink); top: 190px; left: 60px; animation-delay: 0.4s, 1s; }
+  .c4 { --r: -5deg; background: var(--lavender); color: var(--ink); bottom: 30px; right: 10px; width:180px; animation-delay: 0.55s, 1.15s; }
+  .c5 { --r: 9deg; background: var(--cream); color: var(--ink); bottom: 0; left: 0; width:150px; animation-delay: 0.7s, 1.3s; }
+  .pin2027 {
+    position: absolute;
+    top: 190px;
+    right: 40px;
+    background: var(--ink);
+    border: 2px solid var(--mint2);
+    color: var(--mint2);
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    display: flex; align-items:center; justify-content:center;
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transform: rotate(-4deg);
+    box-shadow: 0 14px 26px -10px rgba(0,0,0,0.5);
+    z-index: 3;
+    opacity: 0;
+    animation: popPin 0.6s cubic-bezier(.22,.61,.36,1) 0.05s forwards;
+    transition: transform 0.3s ease;
+  }
+  .pin2027:hover { transform: rotate(0deg) scale(1.08); }
+  .pindot {
+    width: 10px; height: 10px; border-radius: 50%; background: var(--ink);
+    position: absolute; left: 50%; top: 8px; transform: translateX(-50%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+  }
+
+  /* ---------- SECTION BASICS ---------- */
+  section { padding: 90px 0; }
+  .section-head { max-width: 620px; margin: 0 auto 50px; text-align:center; }
+  .section-head .kicker {
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--pink);
+    display:block;
+    margin-bottom: 4px;
+    transform: rotate(-2deg);
+  }
+  .section-head h2 {
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .section-head p { margin-top: 14px; color: #4b6a6a; font-size: 1.02rem; }
+
+  /* ---------- GAIN GRID (sticky notes) ---------- */
+  .gain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .sticky {
+    padding: 30px 24px;
+    border-radius: 8px;
+    position: relative;
+    min-height: 150px;
+    transition: transform 0.3s cubic-bezier(.22,.61,.36,1), box-shadow 0.3s ease;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
+  }
+  .sticky:hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.03) !important;
+    box-shadow: 0 18px 30px -14px rgba(16,69,71,0.35);
+    z-index: 2;
+  }
+  .sticky h3 { font-size: 1.05rem; font-weight: 600; line-height:1.35; margin-top:10px;}
+  .sticky .num { font-family:'Caveat', cursive; font-size:2rem; font-weight:700; opacity:0.55; }
+  .s0 { background: var(--mint2); transform: rotate(-1.5deg); }
+  .s1 { background: var(--cream); transform: rotate(1deg); }
+  .s2 { background: var(--sky); transform: rotate(-1deg); }
+  .s3 { background: var(--lavender); transform: rotate(1.5deg); }
+  .s4 { background: var(--pink); transform: rotate(-1deg); }
+  .s5 { background: var(--mint); transform: rotate(1deg); }
+
+  /* ---------- WHO SHOULD ATTEND ---------- */
+  .who-wrap {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 60px 50px;
+    color: var(--cream);
+  }
+  .who-wrap .section-head h2, .who-wrap .section-head p { color: var(--paper); }
+  .who-wrap .section-head p { color: rgba(253,250,242,0.7); }
+  .pill-row { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+  .pill {
+    border: 1.5px solid rgba(253,250,242,0.3);
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  }
+  .pill:hover {
+    background: var(--cream);
+    color: var(--ink);
+    transform: translateY(-3px);
+  }
+  .pill:nth-child(1) { border-color: var(--pink); }
+  .pill:nth-child(2) { border-color: var(--sky); }
+  .pill:nth-child(3) { border-color: var(--mint); }
+  .pill:nth-child(4) { border-color: var(--lavender); }
+  .pill:nth-child(5) { border-color: var(--cream); }
+
+  /* ---------- HIGHLIGHTS TIMELINE ---------- */
+  .timeline { max-width: 720px; margin: 0 auto; position:relative; padding-left: 34px; }
+  .timeline::before {
+    content:''; position:absolute; left: 9px; top:6px; bottom:6px; width:2px;
+    background: repeating-linear-gradient(to bottom, var(--pink) 0 6px, transparent 6px 12px);
+  }
+  .t-item { position: relative; padding-bottom: 34px; }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content:''; position:absolute; left:-34px; top:2px; width:20px; height:20px; border-radius:50%;
+    background: var(--pink); border: 4px solid var(--paper); box-shadow: 0 0 0 2px var(--ink);
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .t-item:hover::before { transform: scale(1.25); background: var(--ink); }
+  .t-item h3 { font-size: 1.08rem; font-weight:600; transition: color 0.25s ease; }
+  .t-item:hover h3 { color: var(--pink); }
+  .t-item p { color:#4b6a6a; margin-top:4px; font-size:0.96rem;}
+
+  /* ---------- STATS / MOMENT ---------- */
+  .banner {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 60px 50px;
+    text-align: center;
+  }
+  .banner h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight:600; max-width:640px; margin:0 auto; }
+  .banner p.lead { margin-top:16px; color:#4b6a6a; max-width: 520px; margin-left:auto; margin-right:auto;}
+  .banner .btn-primary { margin-top: 28px; display:inline-block; }
+
+  /* ---------- DETAILS / PRICING ---------- */
+  .details-grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .detail-card {
+    border: 1.5px solid #d8ddd2;
+    border-radius: 18px;
+    padding: 34px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .detail-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 34px -18px rgba(16,69,71,0.25);
+  }
+  .detail-card h3 { font-size:1.15rem; font-weight:600; margin-bottom:14px; }
+  .detail-row { display:flex; justify-content:space-between; padding: 10px 0; border-bottom: 1px dashed #d8ddd2; font-size:0.95rem;}
+  .detail-row:last-child { border-bottom:none; }
+  .detail-row span:first-child { color:#4b6a6a; }
+  .detail-row span:last-child { font-weight:600; }
+
+  .price-card {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 18px;
+    padding: 34px;
+    display:flex; flex-direction:column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .price-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 40px -16px rgba(16,69,71,0.5);
+  }
+  .price-card .price { font-family:'Fraunces', serif; font-size: 2.6rem; font-weight:600; margin: 6px 0 4px; }
+  .price-card .price small { font-size:1rem; font-weight:400; opacity:0.7; }
+  .price-card ul { list-style:none; margin: 18px 0 26px; }
+  .price-card li { padding: 7px 0; font-size:0.92rem; display:flex; gap:10px; color: rgba(253,250,242,0.85);}
+  .price-card li::before { content:'✓'; color: var(--mint); font-weight:700; }
+  .price-card .btn-primary { text-align:center; margin-top:auto; }
+  .seats-note { font-size:0.82rem; margin-top:14px; color: var(--pink); text-align:center; }
+
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 720px; margin: 0 auto; }
+  details {
+    border-bottom: 1.5px solid #d8ddd2;
+    padding: 20px 0;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    list-style: none;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:'+'; font-size:1.4rem; color: var(--pink); font-weight:400; }
+  details[open] summary::after { content:'–'; }
+  details p { margin-top: 12px; color:#4b6a6a; font-size:0.95rem; }
+
+  /* ---------- FOOTER CTA ---------- */
+  .footer-cta {
+    background: var(--ink);
+    color: var(--paper);
+    text-align:center;
+    padding: 90px 0 60px;
+  }
+  .footer-cta h2 { font-size: clamp(1.8rem,3.4vw,2.6rem); font-weight:600; max-width:600px; margin:0 auto 18px; }
+  .footer-cta p { color: rgba(253,250,242,0.7); max-width: 480px; margin: 0 auto; }
+  .footer-cta .btn-primary { margin-top: 30px; display:inline-block; }
+  footer {
+    background: var(--ink);
+    color: rgba(253,250,242,0.5);
+    text-align:center;
+    padding: 22px 0 34px;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(253,250,242,0.12);
+  }
+
+  @media (max-width: 860px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .board { height: 340px; margin-top: 20px; }
+    .gain-grid { grid-template-columns: 1fr 1fr; }
+    .details-grid { grid-template-columns: 1fr; }
+    .who-wrap { padding: 40px 26px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    .gain-grid { grid-template-columns: 1fr; }
+    nav { padding: 18px 20px; }
+    section { padding: 64px 0; }
+    .card { width: 130px; padding: 14px; }
+    .card .word { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Mfonobong Umondia</div>
+  <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="nav-cta">Reserve my seat</a>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span class="dot"></span> Goal Setting Workshop</span>
+      <h1>Stop hoping for 2027.<br>Start <em>planning</em> it.</h1>
+      <p class="sub">A hands-on workshop for people who are done floating through the year. Walk in with a wish list. Walk out with a vision board, a SMART goal plan, and a roadmap you'll actually follow.</p>
+      <div class="hero-ctas">
+        <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="btn-primary">Reserve my seat →</a>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Format</strong>Live &amp; interactive</div>
+        <div><strong>For</strong>Individuals &amp; teams</div>
+        <div><strong>You leave with</strong>Vision board + action plan</div>
+      </div>
+    </div>
+    <div class="board" aria-hidden="true">
+      <div class="pin2027"><span>2027<div class="pindot"></div></span></div>
+      <div class="card c1"><div class="pindot"></div><div class="word">Career</div><div class="note">promotion, finally</div></div>
+      <div class="card c2"><div class="pindot"></div><div class="word">Health</div><div class="note">show up daily</div></div>
+      <div class="card c3"><div class="pindot"></div><div class="word">Money</div><div class="note">save with intention</div></div>
+      <div class="card c4"><div class="pindot"></div><div class="word">Peace</div><div class="note">less noise, more focus</div></div>
+      <div class="card c5"><div class="pindot"></div><div class="word">Growth</div><div class="note">become her</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">why this workshop</span>
+      <h2>Turn your vision for 2027 into a clear, actionable plan</h2>
+      <p>This isn't a vague "manifest your dreams" session. It's a structured, guided experience for individuals, professionals, entrepreneurs, and teams who want to define meaningful goals, align their priorities, and build a practical roadmap they can actually execute month by month, not just January 1st.</p>
+    </div>
+    <div class="section-head reveal" style="max-width:700px;">
+      <p>You'll reflect on what actually moved the needle this year, spot where you're leaving growth on the table, and set SMART goals - specific, measurable, achievable, relevant, time-bound through guided exercises and expert facilitation. Then, we'll bring it to life: building your own <strong>2027 vision board</strong>, a visual map of your goals and desired outcomes that keeps you focused long after the workshop ends.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gain">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">what you'll gain</span>
+      <h2>Six things you'll walk away with</h2>
+    </div>
+    <div class="gain-grid reveal-stagger">
+      <div class="sticky s0 stagger-child" style="animation-delay:0.05s"><div class="num">01</div><h3>A clear vision for your personal &amp; professional success in 2027</h3></div>
+      <div class="sticky s1 stagger-child" style="animation-delay:0.15s"><div class="num">02</div><h3>A personalized vision board representing your goals and aspirations</h3></div>
+      <div class="sticky s2 stagger-child" style="animation-delay:0.25s"><div class="num">03</div><h3>Structured goal-setting frameworks and planning tools you'll reuse all year</h3></div>
+      <div class="sticky s3 stagger-child" style="animation-delay:0.35s"><div class="num">04</div><h3>Strategies to overcome obstacles and stay accountable</h3></div>
+      <div class="sticky s4 stagger-child" style="animation-delay:0.45s"><div class="num">05</div><h3>Increased focus, productivity, and confidence going into the new year</h3></div>
+      <div class="sticky s5 stagger-child" style="animation-delay:0.55s"><div class="num">06</div><h3>A customized action plan with measurable milestones</h3></div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="who-wrap reveal">
+      <div class="section-head">
+        <span class="kicker">who this is for</span>
+        <h2>Built for people ready to be intentional</h2>
+        <p>Wherever you're starting from, this workshop meets you there.</p>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Professionals seeking career growth</span>
+        <span class="pill">Entrepreneurs &amp; business owners</span>
+        <span class="pill">Team leaders &amp; managers</span>
+        <span class="pill">Students &amp; recent graduates</span>
+        <span class="pill">Anyone ready for their most intentional year yet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="highlights">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">how the day flows</span>
+      <h2>Workshop highlights</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item"><h3>Vision &amp; priority-setting exercises</h3><p>Get honest about what mattered this year, and what deserves your energy next.</p></div>
+      <div class="t-item"><h3>Vision board creation session for 2027</h3><p>A guided, creative session to make your goals visual, tangible, and impossible to ignore.</p></div>
+      <div class="t-item"><h3>SMART goal development</h3><p>Turn broad ambitions into specific, measurable, achievable, relevant, time-bound goals.</p></div>
+      <div class="t-item"><h3>Action planning &amp; milestone mapping</h3><p>Break the year into checkpoints so progress is visible, not just hoped for.</p></div>
+      <div class="t-item"><h3>Accountability &amp; habit-building strategies</h3><p>Systems to keep you consistent long after the workshop ends.</p></div>
+      <div class="t-item"><h3>Interactive discussions &amp; practical worksheets</h3><p>Real conversation, real tools — not another passive webinar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="banner">
+  <div class="wrap">
+    <div class="banner reveal">
+      <h2>Don't leave 2027 to chance.</h2>
+      <p class="lead">Every year you plan for is a year you're more likely to look back on with pride. Give yourself the clarity, strategy, and momentum to make this the one.</p>
+      <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="btn-primary">Reserve my seat →</a>
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">the details</span>
+      <h2>Save your spot</h2>
+    </div>
+    <div class="details-grid reveal">
+      <div class="detail-card">
+        <h3>Workshop details</h3>
+        <div class="detail-row"><span>Date</span><span>5th December, 2026</span></div>
+        <div class="detail-row"><span>Time</span><span>7-9 PM West African Time</span></div>
+        <div class="detail-row"><span>Format</span><span>Virtual Live, interactive session</span></div>
+        <div class="detail-row"><span>Location</span><span>Google Meet</span></div>
+        <div class="detail-row"><span>Facilitator</span><span>Mfonobong Umondia</span></div>
+        <div class="detail-row"><span>Materials</span><span>Vision board kit + worksheets included</span></div>
+      </div>
+      <div class="price-card">
+        <span style="font-size:0.85rem; opacity:0.7;">Workshop access</span>
+        <div class="price">₦15,000<small> / seat</small></div>
+        <ul>
+          <li>Full live workshop access</li>
+          <li>Vision board creation session</li>
+          <li>SMART goal &amp; action planning worksheets</li>
+          <li>Accountability &amp; habit-building guide</li>
+          <li>Personalized 2027 action plan template</li>
+        </ul>
+        <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="btn-primary">Register now</a>
+        <div class="seats-note">Limited seats - small group for real, guided attention.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">questions</span>
+      <h2>Before you register</h2>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary>Who is this workshop for?</summary>
+        <p>Anyone who wants to enter 2027 with a clear plan instead of a vague hope. This includes professionals, entrepreneurs, team leads, students, and individuals alike. No prior goal-setting experience needed.</p>
+      </details>
+      <details>
+        <summary>Do I need to prepare anything beforehand?</summary>
+        <p>Just bring an open mind and a willingness to reflect honestly on the past year. Any materials you'll need for the vision board exercise will be provided or listed ahead of time.</p>
+      </details>
+      <details>
+        <summary>Is this workshop virtual or in-person?</summary>
+        <p>This is a virtual session and will run live and interactively, with room for real discussion, not a passive lecture.</p>
+      </details>
+      <details>
+        <summary>Can I attend with my team?</summary>
+        <p>Yes, this workshop works well for teams and small groups who want to align on shared priorities heading into 2027. Reach out for group rates.</p>
+      </details>
+      <details>
+        <summary>What if I can't make it live?</summary>
+        <p>A live recording and support group chat will be available for three months post workshop</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="footer-cta">
+  <div class="wrap reveal">
+    <h2>Your 2027 starts with one decision.</h2>
+    <p>Make it this one. Join the Goal Setting Workshop and gain the clarity, strategy, and momentum to turn your ambitions into achievements.</p>
+    <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="btn-primary">Reserve my seat →</a>
+  </div>
+</div>
+
+<footer>
+  Goal Setting Workshop for 2027 — hosted by Mfonobong Umondia
+</footer>
+
+<script>
+  var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(function(el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('in-view'); });
+  }
+</script>
+</body>
+</html>
