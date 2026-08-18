@@ -39,81 +39,56 @@
   }
 
   @keyframes floatCard {
-    0%, 100% {
-      transform: translateY(0) rotate(var(--r, 0deg));
-    }
-
-    50% {
-      transform: translateY(-10px) rotate(var(--r, 0deg));
-    }
+    0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--r, 0deg)); }
   }
 
   @keyframes cardIn {
-    from {
-      opacity: 0;
-      transform: translateY(24px) rotate(var(--r, 0deg)) scale(0.92);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0) rotate(var(--r, 0deg)) scale(1);
-    }
+    from { opacity: 0; transform: translateY(24px) rotate(var(--r, 0deg)) scale(0.92); }
+    to { opacity: 1; transform: translateY(0) rotate(var(--r, 0deg)) scale(1); }
   }
 
   @keyframes popPin {
-    0% {
-      opacity: 0;
-      transform: scale(0.5) rotate(-4deg);
-    }
-
-    70% {
-      transform: scale(1.08) rotate(-4deg);
-    }
-
-    100% {
-      opacity: 1;
-      transform: scale(1) rotate(-4deg);
-    }
+    0% { opacity: 0; transform: scale(0.5) rotate(-4deg); }
+    70% { transform: scale(1.08) rotate(-4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(-4deg); }
   }
 
   @keyframes heroTextIn {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes pulseRing {
-    0% {
-      box-shadow: 0 0 0 0 rgba(195,232,189,0.5);
-    }
+    0% { box-shadow: 0 0 0 0 rgba(195,232,189,0.5); }
+    100% { box-shadow: 0 0 0 14px rgba(195,232,189,0); }
+  }
 
-    100% {
-      box-shadow: 0 0 0 14px rgba(195,232,189,0);
-    }
+  @keyframes pulseRingPink {
+    0% { box-shadow: 0 0 0 0 rgba(255,153,200,0.55); }
+    100% { box-shadow: 0 0 0 14px rgba(255,153,200,0); }
+  }
+
+  @keyframes tickPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition:
-      opacity 0.7s cubic-bezier(.22,.61,.36,1),
-      transform 0.7s cubic-bezier(.22,.61,.36,1);
+    transition: opacity 0.7s cubic-bezier(.22,.61,.36,1), transform 0.7s cubic-bezier(.22,.61,.36,1);
   }
 
-  .reveal.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-  .reveal-stagger .stagger-child {
-    opacity: 0;
-  }
+  .reveal-stagger .stagger-child { opacity: 0; }
 
   .reveal-stagger.in-view .stagger-child {
     animation: cardIn 0.6s cubic-bezier(.22,.61,.36,1) both;
@@ -127,27 +102,43 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 {
-    font-family: 'Fraunces', serif;
-    letter-spacing: -0.01em;
+  h1, h2, h3 { font-family: 'Fraunces', serif; letter-spacing: -0.01em; }
+
+  .tag-font { font-family: 'Caveat', cursive; }
+
+  a { color: inherit; }
+
+  img, svg { display: block; }
+
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- URGENCY MARQUEE (top strip) ---------- */
+
+  .urgency-strip {
+    background: var(--pink);
+    color: var(--ink);
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
   }
 
-  .tag-font {
-    font-family: 'Caveat', cursive;
+  .urgency-track {
+    display: inline-flex;
+    animation: marquee 22s linear infinite;
   }
 
-  a {
-    color: inherit;
+  .urgency-track span {
+    padding: 9px 28px;
+    display: inline-block;
   }
 
-  img, svg {
-    display: block;
-  }
-
-  .wrap {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 32px;
+  .urgency-track span::after {
+    content: '•';
+    margin-left: 28px;
+    opacity: 0.6;
   }
 
   /* ---------- NAV ---------- */
@@ -159,13 +150,22 @@
     padding: 22px 32px;
     max-width: 1140px;
     margin: 0 auto;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
-  .brand {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.15rem;
+  .brand { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem; color: var(--ink); }
+
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+
+  .nav-price-flag {
+    font-size: 0.78rem;
+    font-weight: 700;
     color: var(--ink);
+    background: var(--mint);
+    padding: 6px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
   }
 
   .nav-cta {
@@ -181,32 +181,15 @@
     transition: transform 0.25s ease, background 0.25s ease;
   }
 
-  .nav-cta:hover {
-    background: var(--pink);
-    color: var(--ink);
-    transform: translateY(-2px);
-  }
+  .nav-cta:hover { background: var(--pink); color: var(--ink); transform: translateY(-2px); }
 
-  nav {
-    animation: heroTextIn 0.7s ease both;
-  }
+  nav { animation: heroTextIn 0.7s ease both; }
 
   /* ---------- HERO ---------- */
 
-  .hero {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 60px 0 90px;
-    position: relative;
-    overflow: hidden;
-  }
+  .hero { background: var(--ink); color: var(--cream); padding: 50px 0 90px; position: relative; overflow: hidden; }
 
-  .hero .wrap {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 40px;
-    align-items: center;
-  }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
 
   .eyebrow {
     display: inline-flex;
@@ -242,11 +225,7 @@
     animation: heroTextIn 0.7s ease 0.15s both;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--mint);
-    font-weight: 500;
-  }
+  .hero h1 em { font-style: italic; color: var(--mint); font-weight: 500; }
 
   .hero p.sub {
     margin-top: 22px;
@@ -256,13 +235,63 @@
     animation: heroTextIn 0.7s ease 0.25s both;
   }
 
-  .hero-ctas {
-    margin-top: 34px;
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    animation: heroTextIn 0.7s ease 0.35s both;
+  /* Hero countdown */
+
+  .hero-countdown {
+    margin-top: 30px;
+    animation: heroTextIn 0.7s ease 0.32s both;
   }
+
+  .hero-countdown .cd-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pink);
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hero-countdown .cd-label .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pink);
+    animation: pulseRingPink 1.8s ease-out infinite;
+  }
+
+  .cd-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .cd-unit {
+    background: rgba(253,250,242,0.08);
+    border: 1px solid rgba(253,250,242,0.18);
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-width: 66px;
+    text-align: center;
+  }
+
+  .cd-unit .cd-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--mint2);
+    line-height: 1;
+  }
+
+  .cd-unit.tick .cd-num { animation: tickPop 0.5s ease; }
+
+  .cd-unit .cd-sub {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(253,250,242,0.55);
+    margin-top: 4px;
+  }
+
+  .hero-ctas { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; animation: heroTextIn 0.7s ease 0.35s both; }
 
   .btn-primary {
     background: var(--pink);
@@ -274,10 +303,7 @@
     font-size: 1rem;
     box-shadow: 0 10px 30px -8px rgba(255,153,200,0.6);
     display: inline-block;
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
 
   .btn-primary:hover {
@@ -286,9 +312,7 @@
     background: var(--mint);
   }
 
-  .btn-primary:active {
-    transform: translateY(-1px) scale(0.99);
-  }
+  .btn-primary:active { transform: translateY(-1px) scale(0.99); }
 
   .btn-secondary {
     border: 1.5px solid rgba(253,250,242,0.35);
@@ -302,13 +326,10 @@
     transition: border-color 0.25s ease, transform 0.25s ease;
   }
 
-  .btn-secondary:hover {
-    border-color: var(--mint2);
-    transform: translateY(-2px);
-  }
+  .btn-secondary:hover { border-color: var(--mint2); transform: translateY(-2px); }
 
   .hero-meta {
-    margin-top: 30px;
+    margin-top: 26px;
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
@@ -328,10 +349,7 @@
 
   /* Vision board collage */
 
-  .board {
-    position: relative;
-    height: 460px;
-  }
+  .board { position: relative; height: 460px; }
 
   .card {
     position: absolute;
@@ -341,9 +359,7 @@
     box-shadow: 0 18px 30px -12px rgba(0,0,0,0.35);
     font-family: 'Fraunces', serif;
     opacity: 0;
-    animation:
-      cardIn 0.6s cubic-bezier(.22,.61,.36,1) forwards,
-      floatCard 5s ease-in-out infinite;
+    animation: cardIn 0.6s cubic-bezier(.22,.61,.36,1) forwards, floatCard 5s ease-in-out infinite;
     transition: transform 0.35s ease, box-shadow 0.35s ease;
     cursor: default;
   }
@@ -355,66 +371,15 @@
     z-index: 4;
   }
 
-  .card .word {
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.15;
-  }
+  .card .word { font-size: 1.3rem; font-weight: 600; line-height: 1.15; }
 
-  .card .note {
-    font-family: 'Caveat', cursive;
-    font-size: 1.05rem;
-    margin-top: 8px;
-    opacity: 0.75;
-  }
+  .card .note { font-family: 'Caveat', cursive; font-size: 1.05rem; margin-top: 8px; opacity: 0.75; }
 
-  .c1 {
-    --r: -7deg;
-    background: var(--mint);
-    color: var(--ink);
-    top: 0;
-    left: 10px;
-    animation-delay: 0.1s, 0.7s;
-  }
-
-  .c2 {
-    --r: 6deg;
-    background: var(--pink);
-    color: var(--ink);
-    top: 18px;
-    right: 0;
-    width: 150px;
-    animation-delay: 0.25s, 0.85s;
-  }
-
-  .c3 {
-    --r: 4deg;
-    background: var(--sky);
-    color: var(--ink);
-    top: 190px;
-    left: 60px;
-    animation-delay: 0.4s, 1s;
-  }
-
-  .c4 {
-    --r: -5deg;
-    background: var(--lavender);
-    color: var(--ink);
-    bottom: 30px;
-    right: 10px;
-    width: 180px;
-    animation-delay: 0.55s, 1.15s;
-  }
-
-  .c5 {
-    --r: 9deg;
-    background: var(--cream);
-    color: var(--ink);
-    bottom: 0;
-    left: 0;
-    width: 150px;
-    animation-delay: 0.7s, 1.3s;
-  }
+  .c1 { --r: -7deg; background: var(--mint); color: var(--ink); top: 0; left: 10px; animation-delay: 0.1s, 0.7s; }
+  .c2 { --r: 6deg; background: var(--pink); color: var(--ink); top: 18px; right: 0; width: 150px; animation-delay: 0.25s, 0.85s; }
+  .c3 { --r: 4deg; background: var(--sky); color: var(--ink); top: 190px; left: 60px; animation-delay: 0.4s, 1s; }
+  .c4 { --r: -5deg; background: var(--lavender); color: var(--ink); bottom: 30px; right: 10px; width: 180px; animation-delay: 0.55s, 1.15s; }
+  .c5 { --r: 9deg; background: var(--cream); color: var(--ink); bottom: 0; left: 0; width: 150px; animation-delay: 0.7s, 1.3s; }
 
   .pin2027 {
     position: absolute;
@@ -440,9 +405,7 @@
     transition: transform 0.3s ease;
   }
 
-  .pin2027:hover {
-    transform: rotate(0deg) scale(1.08);
-  }
+  .pin2027:hover { transform: rotate(0deg) scale(1.08); }
 
   .pindot {
     width: 10px;
@@ -458,15 +421,9 @@
 
   /* ---------- SECTION BASICS ---------- */
 
-  section {
-    padding: 90px 0;
-  }
+  section { padding: 90px 0; }
 
-  .section-head {
-    max-width: 620px;
-    margin: 0 auto 50px;
-    text-align: center;
-  }
+  .section-head { max-width: 620px; margin: 0 auto 50px; text-align: center; }
 
   .section-head .kicker {
     font-family: 'Caveat', cursive;
@@ -477,34 +434,20 @@
     transform: rotate(-2deg);
   }
 
-  .section-head h2 {
-    font-size: clamp(1.7rem, 3vw, 2.3rem);
-    font-weight: 600;
-    color: var(--ink);
-  }
+  .section-head h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 600; color: var(--ink); }
 
-  .section-head p {
-    margin-top: 14px;
-    color: #4b6a6a;
-    font-size: 1.02rem;
-  }
+  .section-head p { margin-top: 14px; color: #4b6a6a; font-size: 1.02rem; }
 
   /* ---------- GAIN GRID (sticky notes) ---------- */
 
-  .gain-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 26px;
-  }
+  .gain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
 
   .sticky {
     padding: 30px 24px;
     border-radius: 8px;
     position: relative;
     min-height: 150px;
-    transition:
-      transform 0.3s cubic-bezier(.22,.61,.36,1),
-      box-shadow 0.3s ease;
+    transition: transform 0.3s cubic-bezier(.22,.61,.36,1), box-shadow 0.3s ease;
     box-shadow: 0 0 0 rgba(0,0,0,0);
   }
 
@@ -514,74 +457,26 @@
     z-index: 2;
   }
 
-  .sticky h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.35;
-    margin-top: 10px;
-  }
+  .sticky h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.35; margin-top: 10px; }
 
-  .sticky .num {
-    font-family: 'Caveat', cursive;
-    font-size: 2rem;
-    font-weight: 700;
-    opacity: 0.55;
-  }
+  .sticky .num { font-family: 'Caveat', cursive; font-size: 2rem; font-weight: 700; opacity: 0.55; }
 
-  .s0 {
-    background: var(--mint2);
-    transform: rotate(-1.5deg);
-  }
-
-  .s1 {
-    background: var(--cream);
-    transform: rotate(1deg);
-  }
-
-  .s2 {
-    background: var(--sky);
-    transform: rotate(-1deg);
-  }
-
-  .s3 {
-    background: var(--lavender);
-    transform: rotate(1.5deg);
-  }
-
-  .s4 {
-    background: var(--pink);
-    transform: rotate(-1deg);
-  }
-
-  .s5 {
-    background: var(--mint);
-    transform: rotate(1deg);
-  }
+  .s0 { background: var(--mint2); transform: rotate(-1.5deg); }
+  .s1 { background: var(--cream); transform: rotate(1deg); }
+  .s2 { background: var(--sky); transform: rotate(-1deg); }
+  .s3 { background: var(--lavender); transform: rotate(1.5deg); }
+  .s4 { background: var(--pink); transform: rotate(-1deg); }
+  .s5 { background: var(--mint); transform: rotate(1deg); }
 
   /* ---------- WHO SHOULD ATTEND ---------- */
 
-  .who-wrap {
-    background: var(--ink);
-    border-radius: 24px;
-    padding: 60px 50px;
-    color: var(--cream);
-  }
+  .who-wrap { background: var(--ink); border-radius: 24px; padding: 60px 50px; color: var(--cream); }
 
-  .who-wrap .section-head h2,
-  .who-wrap .section-head p {
-    color: var(--paper);
-  }
+  .who-wrap .section-head h2, .who-wrap .section-head p { color: var(--paper); }
 
-  .who-wrap .section-head p {
-    color: rgba(253,250,242,0.7);
-  }
+  .who-wrap .section-head p { color: rgba(253,250,242,0.7); }
 
-  .pill-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-    justify-content: center;
-  }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
   .pill {
     border: 1.5px solid rgba(253,250,242,0.3);
@@ -589,46 +484,20 @@
     border-radius: 999px;
     font-size: 0.95rem;
     font-weight: 500;
-    transition:
-      background 0.25s ease,
-      transform 0.25s ease,
-      color 0.25s ease;
+    transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease;
   }
 
-  .pill:hover {
-    background: var(--cream);
-    color: var(--ink);
-    transform: translateY(-3px);
-  }
+  .pill:hover { background: var(--cream); color: var(--ink); transform: translateY(-3px); }
 
-  .pill:nth-child(1) {
-    border-color: var(--pink);
-  }
-
-  .pill:nth-child(2) {
-    border-color: var(--sky);
-  }
-
-  .pill:nth-child(3) {
-    border-color: var(--mint);
-  }
-
-  .pill:nth-child(4) {
-    border-color: var(--lavender);
-  }
-
-  .pill:nth-child(5) {
-    border-color: var(--cream);
-  }
+  .pill:nth-child(1) { border-color: var(--pink); }
+  .pill:nth-child(2) { border-color: var(--sky); }
+  .pill:nth-child(3) { border-color: var(--mint); }
+  .pill:nth-child(4) { border-color: var(--lavender); }
+  .pill:nth-child(5) { border-color: var(--cream); }
 
   /* ---------- HIGHLIGHTS TIMELINE ---------- */
 
-  .timeline {
-    max-width: 720px;
-    margin: 0 auto;
-    position: relative;
-    padding-left: 34px;
-  }
+  .timeline { max-width: 720px; margin: 0 auto; position: relative; padding-left: 34px; }
 
   .timeline::before {
     content: '';
@@ -637,21 +506,12 @@
     top: 6px;
     bottom: 6px;
     width: 2px;
-    background: repeating-linear-gradient(
-      to bottom,
-      var(--pink) 0 6px,
-      transparent 6px 12px
-    );
+    background: repeating-linear-gradient(to bottom, var(--pink) 0 6px, transparent 6px 12px);
   }
 
-  .t-item {
-    position: relative;
-    padding-bottom: 34px;
-  }
+  .t-item { position: relative; padding-bottom: 34px; }
 
-  .t-item:last-child {
-    padding-bottom: 0;
-  }
+  .t-item:last-child { padding-bottom: 0; }
 
   .t-item::before {
     content: '';
@@ -667,83 +527,56 @@
     transition: transform 0.3s ease, background 0.3s ease;
   }
 
-  .t-item:hover::before {
-    transform: scale(1.25);
-    background: var(--ink);
-  }
+  .t-item:hover::before { transform: scale(1.25); background: var(--ink); }
 
-  .t-item h3 {
-    font-size: 1.08rem;
-    font-weight: 600;
-    transition: color 0.25s ease;
-  }
+  .t-item h3 { font-size: 1.08rem; font-weight: 600; transition: color 0.25s ease; }
 
-  .t-item:hover h3 {
-    color: var(--pink);
-  }
+  .t-item:hover h3 { color: var(--pink); }
 
-  .t-item p {
-    color: #4b6a6a;
-    margin-top: 4px;
-    font-size: 0.96rem;
-  }
+  .t-item p { color: #4b6a6a; margin-top: 4px; font-size: 0.96rem; }
 
   /* ---------- STATS / MOMENT ---------- */
 
-  .banner {
-    background: var(--cream);
-    border-radius: 24px;
-    padding: 60px 50px;
-    text-align: center;
+  .banner { background: var(--cream); border-radius: 24px; padding: 60px 50px; text-align: center; }
+
+  .banner h2 { font-size: clamp(1.6rem,3vw,2.2rem); font-weight: 600; max-width: 640px; margin: 0 auto; }
+
+  .banner p.lead { margin-top: 16px; color: #4b6a6a; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+  .banner .btn-primary { margin-top: 28px; display: inline-block; }
+
+  .banner .mini-cd {
+    margin-top: 26px;
+    display: inline-flex;
+    gap: 8px;
+    background: var(--ink);
+    padding: 10px 16px;
+    border-radius: 999px;
+    color: var(--cream);
+    font-size: 0.85rem;
+    font-weight: 700;
+    align-items: center;
   }
 
-  .banner h2 {
-    font-size: clamp(1.6rem,3vw,2.2rem);
-    font-weight: 600;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .banner p.lead {
-    margin-top: 16px;
-    color: #4b6a6a;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .banner .btn-primary {
-    margin-top: 28px;
-    display: inline-block;
+  .banner .mini-cd .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--pink);
+    animation: pulseRingPink 1.8s ease-out infinite;
   }
 
   /* ---------- DETAILS / PRICING ---------- */
 
-  .details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
+  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
 
   .detail-card {
     border: 1.5px solid #d8ddd2;
     border-radius: 18px;
     padding: 34px;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .detail-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 34px -18px rgba(16,69,71,0.25);
-  }
+  .detail-card:hover { transform: translateY(-6px); box-shadow: 0 20px 34px -18px rgba(16,69,71,0.25); }
 
-  .detail-card h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
+  .detail-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; }
 
   .detail-row {
     display: flex;
@@ -753,56 +586,130 @@
     font-size: 0.95rem;
   }
 
-  .detail-row:last-child {
-    border-bottom: none;
+  .detail-row:last-child { border-bottom: none; }
+
+  .detail-row span:first-child { color: #4b6a6a; }
+
+  .detail-row span:last-child { font-weight: 600; }
+
+  /* Pricing deadline strip inside details column */
+
+  .deadline-box {
+    margin-top: 22px;
+    background: var(--mint2);
+    border: 1.5px dashed var(--ink);
+    border-radius: 14px;
+    padding: 20px 22px;
   }
 
-  .detail-row span:first-child {
-    color: #4b6a6a;
+  .deadline-box .dl-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: #16706f;
+    margin-bottom: 10px;
   }
 
-  .detail-row span:last-child {
-    font-weight: 600;
+  .deadline-box .cd-row { gap: 8px; flex-wrap: wrap; }
+
+  .deadline-box .cd-unit {
+    background: var(--paper);
+    border: 1px solid rgba(16,69,71,0.15);
+    min-width: 56px;
+    flex: 1 1 56px;
+    padding: 10px 8px;
   }
+
+  .deadline-box .cd-unit .cd-num { color: var(--ink); font-size: 1.3rem; }
+
+  .deadline-box .cd-unit .cd-sub { color: #4b6a6a; }
+
+  /* Pricing cards (two tiers) */
+
+  .price-tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
 
   .price-card {
     background: var(--ink);
     color: var(--paper);
     border-radius: 18px;
-    padding: 34px;
+    padding: 40px 24px 28px;
     display: flex;
     flex-direction: column;
-    transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .price-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 40px -16px rgba(16,69,71,0.5);
+  .price-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -16px rgba(16,69,71,0.5); }
+
+  .price-card.tier-early {
+    outline: 2px solid var(--pink);
+    outline-offset: 3px;
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--pink);
+    color: var(--ink);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 6px 14px;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px -6px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+
+  .tier-badge.badge-muted {
+    background: var(--ink);
+    color: rgba(253,250,242,0.75);
+    border: 1px solid rgba(253,250,242,0.25);
+  }
+
+  .price-card .tier-label {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    display: block;
+    margin-bottom: 8px;
   }
 
   .price-card .price {
     font-family: 'Fraunces', serif;
-    font-size: 2.6rem;
+    font-size: 2.1rem;
     font-weight: 600;
-    margin: 6px 0 4px;
+    line-height: 1.25;
+    margin: 4px 0 10px;
+    word-break: keep-all;
+    white-space: nowrap;
   }
 
-  .price-card .price small {
-    font-size: 1rem;
+  .price-card .price small { font-size: 0.9rem; font-weight: 400; opacity: 0.7; white-space: nowrap; }
+
+  .price-card .price .strike {
+    font-size: 1.05rem;
     font-weight: 400;
-    opacity: 0.7;
+    text-decoration: line-through;
+    opacity: 0.45;
+    margin-right: 8px;
   }
+
+  .price-card.tier-late .price { color: rgba(253,250,242,0.85); }
 
   .price-card ul {
     list-style: none;
-    margin: 18px 0 26px;
+    margin: 14px 0 24px;
+    flex-grow: 1;
   }
 
   .price-card li {
     padding: 7px 0;
-    font-size: 0.92rem;
+    font-size: 0.88rem;
+    line-height: 1.4;
     display: flex;
     gap: 10px;
     color: rgba(253,250,242,0.85);
@@ -812,31 +719,40 @@
     content: '✓';
     color: var(--mint);
     font-weight: 700;
+    flex-shrink: 0;
   }
 
-  .price-card .btn-primary {
+  .price-card.tier-late li::before { color: rgba(253,250,242,0.4); }
+
+  .price-card .btn-primary,
+  .price-card .btn-secondary {
     text-align: center;
     margin-top: auto;
+    width: 100%;
   }
 
   .seats-note {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     margin-top: 14px;
     color: var(--pink);
     text-align: center;
+    line-height: 1.4;
+  }
+
+  .price-savings {
+    font-size: 0.78rem;
+    color: var(--mint2);
+    margin-top: 2px;
+    margin-bottom: 4px;
+    font-weight: 600;
+    line-height: 1.4;
   }
 
   /* ---------- FAQ ---------- */
 
-  .faq {
-    max-width: 720px;
-    margin: 0 auto;
-  }
+  .faq { max-width: 720px; margin: 0 auto; }
 
-  details {
-    border-bottom: 1.5px solid #d8ddd2;
-    padding: 20px 0;
-  }
+  details { border-bottom: 1.5px solid #d8ddd2; padding: 20px 0; }
 
   summary {
     cursor: pointer;
@@ -848,53 +764,25 @@
     align-items: center;
   }
 
-  summary::-webkit-details-marker {
-    display: none;
-  }
+  summary::-webkit-details-marker { display: none; }
 
-  summary::after {
-    content: '+';
-    font-size: 1.4rem;
-    color: var(--pink);
-    font-weight: 400;
-  }
+  summary::after { content: '+'; font-size: 1.4rem; color: var(--pink); font-weight: 400; }
 
-  details[open] summary::after {
-    content: '–';
-  }
+  details[open] summary::after { content: '–'; }
 
-  details p {
-    margin-top: 12px;
-    color: #4b6a6a;
-    font-size: 0.95rem;
-  }
+  details p { margin-top: 12px; color: #4b6a6a; font-size: 0.95rem; }
 
   /* ---------- FOOTER CTA ---------- */
 
-  .footer-cta {
-    background: var(--ink);
-    color: var(--paper);
-    text-align: center;
-    padding: 90px 0 60px;
-  }
+  .footer-cta { background: var(--ink); color: var(--paper); text-align: center; padding: 90px 0 60px; }
 
-  .footer-cta h2 {
-    font-size: clamp(1.8rem,3.4vw,2.6rem);
-    font-weight: 600;
-    max-width: 600px;
-    margin: 0 auto 18px;
-  }
+  .footer-cta h2 { font-size: clamp(1.8rem,3.4vw,2.6rem); font-weight: 600; max-width: 600px; margin: 0 auto 18px; }
 
-  .footer-cta p {
-    color: rgba(253,250,242,0.7);
-    max-width: 480px;
-    margin: 0 auto;
-  }
+  .footer-cta p { color: rgba(253,250,242,0.7); max-width: 480px; margin: 0 auto; }
 
-  .footer-cta .btn-primary {
-    margin-top: 30px;
-    display: inline-block;
-  }
+  .footer-cta .btn-primary { margin-top: 30px; display: inline-block; }
+
+  .footer-cta .cd-row { justify-content: center; margin: 26px auto 0; }
 
   footer {
     background: var(--ink);
@@ -905,65 +793,76 @@
     border-top: 1px solid rgba(253,250,242,0.12);
   }
 
+  /* ---------- STICKY MOBILE BAR ---------- */
+
+  .sticky-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 18px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 -8px 24px -10px rgba(0,0,0,0.4);
+    border-top: 1px solid rgba(253,250,242,0.12);
+  }
+
+  .sticky-bar .sb-info { font-size: 0.78rem; line-height: 1.3; }
+
+  .sticky-bar .sb-info strong { color: var(--mint2); display: block; font-size: 0.85rem; }
+
+  .sticky-bar .btn-primary { padding: 11px 20px; font-size: 0.9rem; white-space: nowrap; }
+
   @media (max-width: 860px) {
-    .hero .wrap {
-      grid-template-columns: 1fr;
-    }
-
-    .board {
-      height: 340px;
-      margin-top: 20px;
-    }
-
-    .gain-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .details-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .who-wrap {
-      padding: 40px 26px;
-    }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .board { height: 340px; margin-top: 20px; }
+    .gain-grid { grid-template-columns: 1fr 1fr; }
+    .details-grid { grid-template-columns: 1fr; }
+    .price-tiers { grid-template-columns: 1fr; }
+    .who-wrap { padding: 40px 26px; }
+    .sticky-bar { display: flex; }
+    body { padding-bottom: 72px; }
   }
 
   @media (max-width: 560px) {
-    .wrap {
-      padding: 0 20px;
-    }
-
-    .gain-grid {
-      grid-template-columns: 1fr;
-    }
-
-    nav {
-      padding: 18px 20px;
-    }
-
-    section {
-      padding: 64px 0;
-    }
-
-    .card {
-      width: 130px;
-      padding: 14px;
-    }
-
-    .card .word {
-      font-size: 1.05rem;
-    }
+    .wrap { padding: 0 20px; }
+    .gain-grid { grid-template-columns: 1fr; }
+    nav { padding: 18px 20px; }
+    section { padding: 64px 0; }
+    .card { width: 130px; padding: 14px; }
+    .card .word { font-size: 1.05rem; }
+    .cd-unit { min-width: 54px; padding: 10px 8px; }
+    .cd-unit .cd-num { font-size: 1.2rem; }
   }
 </style>
 </head>
 
 <body>
 
+<div class="urgency-strip">
+  <div class="urgency-track">
+    <span>🔥 Early bird ₦15,000 ends September 30th</span>
+    <span>Price jumps to ₦35,000 after early bird</span>
+    <span>Limited seats — small group for real guided attention</span>
+    <span>🔥 Early bird ₦15,000 ends September 30th</span>
+    <span>Price jumps to ₦35,000 after early bird</span>
+    <span>Limited seats — small group for real guided attention</span>
+  </div>
+</div>
+
 <nav>
   <div class="brand">Mfonobong Umondia</div>
-  <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" class="nav-cta">
-    Reserve my seat
-  </a>
+  <div class="nav-right">
+    <span class="nav-price-flag" id="navPriceFlag">Early bird ₦15,000</span>
+    <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="nav-cta">
+      Reserve my seat
+    </a>
+  </div>
 </nav>
 
 <header class="hero">
@@ -986,12 +885,22 @@
         plan, and a roadmap you'll actually follow.
       </p>
 
+      <div class="hero-countdown">
+        <div class="cd-label">
+          <span class="dot"></span>
+          Early bird price ends in
+        </div>
+        <div class="cd-row" id="heroCountdown">
+          <div class="cd-unit"><div class="cd-num" data-unit="days">--</div><div class="cd-sub">Days</div></div>
+          <div class="cd-unit"><div class="cd-num" data-unit="hours">--</div><div class="cd-sub">Hrs</div></div>
+          <div class="cd-unit"><div class="cd-num" data-unit="minutes">--</div><div class="cd-sub">Min</div></div>
+          <div class="cd-unit"><div class="cd-num" data-unit="seconds">--</div><div class="cd-sub">Sec</div></div>
+        </div>
+      </div>
+
       <div class="hero-ctas">
-        <a
-          href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront"
-          class="btn-primary"
-        >
-          Reserve my seat →
+        <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Lock in ₦15,000 now →
         </a>
       </div>
 
@@ -1007,8 +916,8 @@
         </div>
 
         <div>
-          <strong>You leave with</strong>
-          Vision board + action plan
+          <strong>After Sept 30</strong>
+          Price rises to ₦35,000
         </div>
       </div>
     </div>
@@ -1101,45 +1010,32 @@
 
       <div class="sticky s0 stagger-child" style="animation-delay:0.05s">
         <div class="num">01</div>
-        <h3>
-          A clear vision for your personal &amp; professional success in 2027
-        </h3>
+        <h3>A clear vision for your personal &amp; professional success in 2027</h3>
       </div>
 
       <div class="sticky s1 stagger-child" style="animation-delay:0.15s">
         <div class="num">02</div>
-        <h3>
-          A personalized vision board representing your goals and aspirations
-        </h3>
+        <h3>A personalized vision board representing your goals and aspirations</h3>
       </div>
 
       <div class="sticky s2 stagger-child" style="animation-delay:0.25s">
         <div class="num">03</div>
-        <h3>
-          Structured goal-setting frameworks and planning tools you'll reuse
-          all year
-        </h3>
+        <h3>Structured goal-setting frameworks and planning tools you'll reuse all year</h3>
       </div>
 
       <div class="sticky s3 stagger-child" style="animation-delay:0.35s">
         <div class="num">04</div>
-        <h3>
-          Strategies to overcome obstacles and stay accountable
-        </h3>
+        <h3>Strategies to overcome obstacles and stay accountable</h3>
       </div>
 
       <div class="sticky s4 stagger-child" style="animation-delay:0.45s">
         <div class="num">05</div>
-        <h3>
-          Increased focus, productivity, and confidence going into the new year
-        </h3>
+        <h3>Increased focus, productivity, and confidence going into the new year</h3>
       </div>
 
       <div class="sticky s5 stagger-child" style="animation-delay:0.55s">
         <div class="num">06</div>
-        <h3>
-          A customized action plan with measurable milestones
-        </h3>
+        <h3>A customized action plan with measurable milestones</h3>
       </div>
 
     </div>
@@ -1154,37 +1050,17 @@
       <div class="section-head">
         <span class="kicker">who this is for</span>
 
-        <h2>
-          Built for people ready to be intentional
-        </h2>
+        <h2>Built for people ready to be intentional</h2>
 
-        <p>
-          Wherever you're starting from, this workshop meets you there.
-        </p>
+        <p>Wherever you're starting from, this workshop meets you there.</p>
       </div>
 
       <div class="pill-row">
-
-        <span class="pill">
-          Professionals seeking career growth
-        </span>
-
-        <span class="pill">
-          Entrepreneurs &amp; business owners
-        </span>
-
-        <span class="pill">
-          Team leaders &amp; managers
-        </span>
-
-        <span class="pill">
-          Students &amp; recent graduates
-        </span>
-
-        <span class="pill">
-          Anyone ready for their most intentional year yet
-        </span>
-
+        <span class="pill">Professionals seeking career growth</span>
+        <span class="pill">Entrepreneurs &amp; business owners</span>
+        <span class="pill">Team leaders &amp; managers</span>
+        <span class="pill">Students &amp; recent graduates</span>
+        <span class="pill">Anyone ready for their most intentional year yet</span>
       </div>
     </div>
   </div>
@@ -1202,47 +1078,32 @@
 
       <div class="t-item">
         <h3>Vision &amp; priority-setting exercises</h3>
-        <p>
-          Get honest about what mattered this year, and what deserves your
-          energy next.
-        </p>
+        <p>Get honest about what mattered this year, and what deserves your energy next.</p>
       </div>
 
       <div class="t-item">
         <h3>Vision board creation session for 2027</h3>
-        <p>
-          A guided, creative session to make your goals visual, tangible,
-          and impossible to ignore.
-        </p>
+        <p>A guided, creative session to make your goals visual, tangible, and impossible to ignore.</p>
       </div>
 
       <div class="t-item">
         <h3>SMART goal development</h3>
-        <p>
-          Turn broad ambitions into specific, measurable, achievable,
-          relevant, time-bound goals.
-        </p>
+        <p>Turn broad ambitions into specific, measurable, achievable, relevant, time-bound goals.</p>
       </div>
 
       <div class="t-item">
         <h3>Action planning &amp; milestone mapping</h3>
-        <p>
-          Break the year into checkpoints so progress is visible, not just hoped for.
-        </p>
+        <p>Break the year into checkpoints so progress is visible, not just hoped for.</p>
       </div>
 
       <div class="t-item">
         <h3>Accountability &amp; habit-building strategies</h3>
-        <p>
-          Systems to keep you consistent long after the workshop ends.
-        </p>
+        <p>Systems to keep you consistent long after the workshop ends.</p>
       </div>
 
       <div class="t-item">
         <h3>Interactive discussions &amp; practical worksheets</h3>
-        <p>
-          Real conversation, real tools — not another passive webinar.
-        </p>
+        <p>Real conversation, real tools — not another passive webinar.</p>
       </div>
 
     </div>
@@ -1254,22 +1115,22 @@
 
     <div class="banner reveal">
 
-      <h2>
-        Don't leave 2027 to chance.
-      </h2>
+      <h2>Don't leave 2027 to chance.</h2>
 
       <p class="lead">
         Every year you plan for is a year you're more likely to look back on
         with pride. Give yourself the clarity, strategy, and momentum to make
-        this the one.
+        this the one. Early bird pricing disappears the moment the clock hits zero.
       </p>
 
-      <a
-        href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront"
-        class="btn-primary"
-      >
+      <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-primary">
         Reserve my seat →
       </a>
+
+      <div class="mini-cd">
+        <span class="dot"></span>
+        <span id="bannerCountdownText">Loading countdown…</span>
+      </div>
 
     </div>
   </div>
@@ -1319,36 +1180,72 @@
           <span>Vision board kit + worksheets included</span>
         </div>
 
-      </div>
-
-      <div class="price-card">
-
-        <span style="font-size:0.85rem; opacity:0.7;">
-          Workshop access
-        </span>
-
-        <div class="price">
-          ₦15,000
-          <small>/ seat</small>
+        <div class="deadline-box">
+          <div class="dl-label">Early bird closes in</div>
+          <div class="cd-row" id="detailsCountdown">
+            <div class="cd-unit"><div class="cd-num" data-unit="days">--</div><div class="cd-sub">Days</div></div>
+            <div class="cd-unit"><div class="cd-num" data-unit="hours">--</div><div class="cd-sub">Hrs</div></div>
+            <div class="cd-unit"><div class="cd-num" data-unit="minutes">--</div><div class="cd-sub">Min</div></div>
+            <div class="cd-unit"><div class="cd-num" data-unit="seconds">--</div><div class="cd-sub">Sec</div></div>
+          </div>
         </div>
 
-        <ul>
-          <li>Full live workshop access</li>
-          <li>Vision board creation session</li>
-          <li>SMART goal &amp; action planning worksheets</li>
-          <li>Accountability &amp; habit-building guide</li>
-          <li>Personalized 2027 action plan template</li>
-        </ul>
+      </div>
 
-        <a
-          href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront"
-          class="btn-primary"
-        >
-          Register now
-        </a>
+      <div class="price-tiers">
 
-        <div class="seats-note">
-          Limited seats - small group for real, guided attention.
+        <div class="price-card tier-early">
+          <span class="tier-badge">Ends Sep 30</span>
+
+          <span class="tier-label">Early bird</span>
+
+          <div class="price">
+            ₦15,000
+            <small>/ seat</small>
+          </div>
+
+          <div class="price-savings">Save ₦20,000 vs. late price</div>
+
+          <ul>
+            <li>Full live workshop access</li>
+            <li>Vision board creation session</li>
+            <li>SMART goal &amp; action planning worksheets</li>
+            <li>Accountability &amp; habit-building guide</li>
+            <li>Personalized 2027 action plan template</li>
+          </ul>
+
+          <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            Lock in ₦15,000
+          </a>
+
+          <div class="seats-note">Limited seats at this price</div>
+        </div>
+
+        <div class="price-card tier-late">
+          <span class="tier-badge badge-muted">From Oct 1</span>
+
+          <span class="tier-label">Late registration</span>
+
+          <div class="price">
+            ₦35,000
+            <small>/ seat</small>
+          </div>
+
+          <div class="price-savings" style="color:rgba(253,250,242,0.45);">Standard rate after early bird closes</div>
+
+          <ul>
+            <li>Full live workshop access</li>
+            <li>Vision board creation session</li>
+            <li>SMART goal &amp; action planning worksheets</li>
+            <li>Accountability &amp; habit-building guide</li>
+            <li>Personalized 2027 action plan template</li>
+          </ul>
+
+          <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            Register at ₦35,000
+          </a>
+
+          <div class="seats-note" style="color:rgba(253,250,242,0.5);">Same workshop, higher price</div>
         </div>
 
       </div>
@@ -1373,6 +1270,15 @@
           Anyone who wants to enter 2027 with a clear plan instead of a vague
           hope. This includes professionals, entrepreneurs, team leads,
           students, and individuals alike. No prior goal-setting experience needed.
+        </p>
+      </details>
+
+      <details>
+        <summary>What's the difference between early bird and late registration?</summary>
+        <p>
+          It's the exact same workshop, materials, and access. Early bird seats
+          are ₦15,000 and close on September 30th. From October 1st, the price
+          moves to the standard ₦35,000 rate. Booking early simply saves you money.
         </p>
       </details>
 
@@ -1405,7 +1311,7 @@
         <summary>What if I can't make it live?</summary>
         <p>
           A live recording and support group chat will be available for three
-          months post workshop
+          months post workshop.
         </p>
       </details>
 
@@ -1417,19 +1323,22 @@
 
   <div class="wrap reveal">
 
-    <h2>
-      Your 2027 starts with one decision.
-    </h2>
+    <h2>Your 2027 starts with one decision.</h2>
 
     <p>
-      Make it this one. Join the Goal Setting Workshop and gain the clarity,
-      strategy, and momentum to turn your ambitions into achievements.
+      Make it this one. Join the Goal Setting Workshop at ₦15,000 before the
+      early bird window closes, and gain the clarity, strategy, and momentum
+      to turn your ambitions into achievements.
     </p>
 
-    <a
-      href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront"
-      class="btn-primary"
-    >
+    <div class="cd-row" id="footerCountdown">
+      <div class="cd-unit"><div class="cd-num" data-unit="days">--</div><div class="cd-sub">Days</div></div>
+      <div class="cd-unit"><div class="cd-num" data-unit="hours">--</div><div class="cd-sub">Hrs</div></div>
+      <div class="cd-unit"><div class="cd-num" data-unit="minutes">--</div><div class="cd-sub">Min</div></div>
+      <div class="cd-unit"><div class="cd-num" data-unit="seconds">--</div><div class="cd-sub">Sec</div></div>
+    </div>
+
+    <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-primary">
       Reserve my seat →
     </a>
 
@@ -1440,39 +1349,109 @@
   Goal Setting Workshop for 2027 — hosted by Mfonobong Umondia
 </footer>
 
-<!-- Existing page animation script -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sb-info">
+    <strong>Early bird ₦15,000</strong>
+    <span id="stickyBarSub">ends Sep 30 — then ₦35,000</span>
+  </div>
+  <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-primary">
+    Reserve seat
+  </a>
+</div>
+
+<!-- Reveal-on-scroll animation -->
 <script>
   var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
 
   if ('IntersectionObserver' in window) {
-
     var io = new IntersectionObserver(function(entries) {
-
       entries.forEach(function(entry) {
-
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
           io.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
+    revealEls.forEach(function(el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('in-view'); });
+  }
+</script>
+
+<!-- Early bird countdown -->
+<script>
+  (function () {
+    // Early bird deadline: September 30, 2026, 11:59:59 PM West Africa Time (UTC+1)
+    var deadline = new Date('2026-09-30T23:59:59+01:00').getTime();
+
+    var countdownGroups = [
+      document.getElementById('heroCountdown'),
+      document.getElementById('detailsCountdown'),
+      document.getElementById('footerCountdown')
+    ].filter(Boolean);
+
+    var bannerText = document.getElementById('bannerCountdownText');
+    var navFlag = document.getElementById('navPriceFlag');
+    var stickyBar = document.getElementById('stickyBar');
+    var stickyBarSub = document.getElementById('stickyBarSub');
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function renderClosedState() {
+      countdownGroups.forEach(function (group) {
+        group.querySelectorAll('.cd-num').forEach(function (el) { el.textContent = '00'; });
+      });
+      if (bannerText) bannerText.textContent = 'Early bird has closed — current price is ₦35,000';
+      if (navFlag) { navFlag.textContent = 'Now ₦35,000'; }
+      if (stickyBarSub) stickyBarSub.textContent = 'Early bird closed — now ₦35,000';
+    }
+
+    function tick() {
+      var now = Date.now();
+      var diff = deadline - now;
+
+      if (diff <= 0) {
+        renderClosedState();
+        return;
+      }
+
+      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      var minutes = Math.floor((diff / (1000 * 60)) % 60);
+      var seconds = Math.floor((diff / 1000) % 60);
+
+      var values = { days: pad(days), hours: pad(hours), minutes: pad(minutes), seconds: pad(seconds) };
+
+      countdownGroups.forEach(function (group) {
+        Object.keys(values).forEach(function (unit) {
+          var el = group.querySelector('[data-unit="' + unit + '"]');
+          if (!el) return;
+          if (el.textContent !== values[unit]) {
+            el.textContent = values[unit];
+            var wrap = el.closest('.cd-unit');
+            if (wrap) {
+              wrap.classList.remove('tick');
+              void wrap.offsetWidth;
+              wrap.classList.add('tick');
+            }
+          }
+        });
       });
 
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -60px 0px'
-    });
+      if (bannerText) {
+        bannerText.textContent =
+          days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's left at ₦15,000 — then it\'s ₦35,000';
+      }
 
-    revealEls.forEach(function(el) {
-      io.observe(el);
-    });
+      if (days < 3 && stickyBar) {
+        stickyBar.style.background = 'linear-gradient(90deg, var(--ink), #7a1746)';
+      }
+    }
 
-  } else {
-
-    revealEls.forEach(function(el) {
-      el.classList.add('in-view');
-    });
-
-  }
+    tick();
+    setInterval(tick, 1000);
+  })();
 </script>
 
 <!-- SPPopups Chat Widget -->
