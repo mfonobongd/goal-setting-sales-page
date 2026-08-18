@@ -700,6 +700,32 @@
 
   .price-card.tier-late .price { color: rgba(253,250,242,0.85); }
 
+  .price-card.is-disabled {
+    opacity: 0.55;
+    filter: grayscale(0.35);
+  }
+
+  .price-card.is-disabled:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .btn-disabled {
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    background: rgba(253,250,242,0.12);
+    color: rgba(253,250,242,0.55);
+    border: 1.5px dashed rgba(253,250,242,0.3);
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: not-allowed;
+    box-shadow: none;
+    pointer-events: none;
+  }
+
   .price-card ul {
     list-style: none;
     margin: 14px 0 24px;
@@ -1221,8 +1247,8 @@
           <div class="seats-note">Limited seats at this price</div>
         </div>
 
-        <div class="price-card tier-late">
-          <span class="tier-badge badge-muted">From Oct 1</span>
+        <div class="price-card tier-late is-disabled">
+          <span class="tier-badge badge-muted">Opens Oct 1</span>
 
           <span class="tier-label">Late registration</span>
 
@@ -1231,7 +1257,7 @@
             <small>/ seat</small>
           </div>
 
-          <div class="price-savings" style="color:rgba(253,250,242,0.45);">Standard rate after early bird closes</div>
+          <div class="price-savings" style="color:rgba(253,250,242,0.45);">Unlocks automatically after early bird closes</div>
 
           <ul>
             <li>Full live workshop access</li>
@@ -1241,11 +1267,11 @@
             <li>Personalized 2027 action plan template</li>
           </ul>
 
-          <a href="https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-            Register at ₦35,000
-          </a>
+          <span class="btn-secondary btn-disabled" aria-disabled="true">
+            Not open yet
+          </span>
 
-          <div class="seats-note" style="color:rgba(253,250,242,0.5);">Same workshop, higher price</div>
+          <div class="seats-note" style="color:rgba(253,250,242,0.5);">Book early bird now — this tier isn't active</div>
         </div>
 
       </div>
@@ -1405,6 +1431,37 @@
       if (bannerText) bannerText.textContent = 'Early bird has closed — current price is ₦35,000';
       if (navFlag) { navFlag.textContent = 'Now ₦35,000'; }
       if (stickyBarSub) stickyBarSub.textContent = 'Early bird closed — now ₦35,000';
+
+      var earlyCard = document.querySelector('.price-card.tier-early');
+      var lateCard = document.querySelector('.price-card.tier-late');
+
+      if (earlyCard && lateCard && lateCard.classList.contains('is-disabled')) {
+        earlyCard.classList.add('is-disabled');
+        var earlyBtn = earlyCard.querySelector('.btn-primary');
+        if (earlyBtn) {
+          var disabledEl = document.createElement('span');
+          disabledEl.className = 'btn-secondary btn-disabled';
+          disabledEl.setAttribute('aria-disabled', 'true');
+          disabledEl.textContent = 'Early bird closed';
+          earlyBtn.replaceWith(disabledEl);
+        }
+        var earlyBadge = earlyCard.querySelector('.tier-badge');
+        if (earlyBadge) earlyBadge.textContent = 'Closed';
+
+        lateCard.classList.remove('is-disabled');
+        var lateDisabled = lateCard.querySelector('.btn-disabled');
+        if (lateDisabled) {
+          var activeBtn = document.createElement('a');
+          activeBtn.href = 'https://mfonobong.nestuge.com/goalsettingwithbella?utm_ref=storefront';
+          activeBtn.target = '_blank';
+          activeBtn.rel = 'noopener noreferrer';
+          activeBtn.className = 'btn-primary';
+          activeBtn.textContent = 'Register at ₦35,000';
+          lateDisabled.replaceWith(activeBtn);
+        }
+        var lateBadge = lateCard.querySelector('.tier-badge');
+        if (lateBadge) lateBadge.textContent = 'Now open';
+      }
     }
 
     function tick() {
